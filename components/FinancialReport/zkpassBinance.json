@@ -1,0 +1,36 @@
+{
+  "issuer": "Binance",
+  "desc": "A global cryptocurrency exchange facilitating trading of a diverse array of digital currencies.",
+  "website": "https://www.binance.com/my/dashboard",
+  "breakWall": true,
+  "APIs": [
+    {
+      "host": "www.binance.com",
+      "intercept": {
+        "url": "bapi/accounts/v1/private/account/user/base-detail",
+        "method": "POST"
+      },
+      "nullifier": "data|userId"
+    },
+    {
+      "host": "www.binance.com",
+      "intercept": {
+        "url": "bapi/asset/v2/private/asset-service/wallet/balance",
+        "method": "GET"
+      },
+      "assert": [
+        {
+          "key": "data|4|balance",
+          "value": "0.00000000",
+          "operation": ">"
+        }
+      ]
+    }
+  ],
+  "HRCondition": [
+    "Your Future Balance is more than 0."
+  ],
+  "tips": {
+    "message": "When you successfully log in, please click the 'Start' button to initiate the verification process."
+  }
+}
